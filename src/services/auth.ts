@@ -1,8 +1,10 @@
 export default class Auth {
   tokenKey: string;
+  refreshTokenKey: string;
 
-  constructor(token_key: string) {
-    this.tokenKey = token_key;
+  constructor(tokenKey: string, refreshTokenKey: string = "") {
+    this.tokenKey = tokenKey;
+    this.refreshTokenKey = refreshTokenKey;
   }
 
   isAuthenticated() {
@@ -13,11 +15,17 @@ export default class Auth {
     return localStorage.getItem(this.tokenKey);
   }
 
-  login(token: string) {
-    return localStorage.setItem(this.tokenKey, token);
+  getRefreshToken() {
+    return localStorage.getItem(this.refreshTokenKey);
+  }
+
+  login(token: string, refreshToken: string = "") {
+    localStorage.setItem(this.tokenKey, token);
+    localStorage.setItem(this.refreshTokenKey, refreshToken);
   }
 
   logout() {
-    return localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.refreshTokenKey);
   }
 }
