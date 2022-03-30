@@ -2,7 +2,7 @@ export default class Auth {
   tokenKey: string;
   refreshTokenKey: string;
 
-  constructor(tokenKey: string, refreshTokenKey: string = "") {
+  constructor(tokenKey: string, refreshTokenKey = "") {
     this.tokenKey = tokenKey;
     this.refreshTokenKey = refreshTokenKey;
   }
@@ -19,7 +19,7 @@ export default class Auth {
     return localStorage.getItem(this.refreshTokenKey);
   }
 
-  login(token: string, refreshToken: string = "") {
+  login(token: string, refreshToken = "") {
     localStorage.setItem(this.tokenKey, token);
     localStorage.setItem(this.refreshTokenKey, refreshToken);
   }

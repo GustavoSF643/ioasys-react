@@ -1,31 +1,27 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { useNavigate } from "react-router-dom";
 import Auth from "./auth";
 
-const tokenKey = process.env.TOKEN_KEY;
-const refreshTokenKey = process.env.REFRESH_TOKEN_KEY;
-
-if (!tokenKey) {
-  throw new Error("TOKEN_KEY environment is required.")
-}
-
-const auth = new Auth(tokenKey, refreshTokenKey);
+const tokenKey = "@ioasys:token";
+const refreshKey = "@ioasys:refresh";
+const auth = new Auth(tokenKey, refreshKey);
 
 const api = axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: "https://books.ioasys.com.br/api/v1",
 });
 
 api.interceptors.request.use((config: AxiosRequestConfig) => {
   const token = auth.getToken();
 
   if (token) {
-    config.headers!.Authorization = `Bearer ${token}`;
+    config.headers = {
+      Authorization: `Bearer ${token}`
+    };
   }
 
   return config;
 });
 
-const refreshToken = (error: any) => {
+const refreshToken = () => {
   return new Promise((resolve, reject) => {
     try {
       const refreshToken = auth.getRefreshToken();
@@ -44,7 +40,7 @@ const refreshToken = (error: any) => {
 
           return resolve(res);
         })
-        .catch((err) => {
+        .catch((error) => {
           auth.logout();
           window.location.reload();
           return reject(error);
@@ -63,13 +59,8 @@ api.interceptors.response.use(
     const token = auth.getToken();
 
     if (error.response.status === 401 && token) {
-      const response = await refreshToken(error);
+      const response = await refreshToken();
       return response;
-    }
-
-    if (error.response.status == 401) {
-      const navigate = useNavigate();
-      navigate("/sign-in");
     }
 
     return Promise.reject(error);
