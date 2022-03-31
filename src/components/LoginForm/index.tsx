@@ -29,11 +29,11 @@ const LoginForm = () => {
       .then((res) => {
         const token = res.headers["authorization"];
         const refreshToken = res.headers["refresh-token"];
-
         auth.login(token, refreshToken);
         window.location.reload();
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e);
         toast.error("Falha ao fazer o login.", {
           position: "top-center",
           autoClose: 5000,

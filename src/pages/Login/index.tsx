@@ -14,12 +14,12 @@ const Login = () => {
   const location = useLocation();
   const state = location.state as CustomizedState;
 
-  if (auth.isAuthenticated() && state.key !== "default") {
+  if (auth.isAuthenticated() && state && state.key !== "default") {
     const previousPage = state.pathname;
     return <Navigate to={previousPage} />
   }
 
-  if (auth.isAuthenticated() && state.key === "default") {
+  if (auth.isAuthenticated()) {
     return <Navigate to="/" />
   }
 

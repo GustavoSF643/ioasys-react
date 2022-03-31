@@ -34,5 +34,21 @@ export const HeaderContainer = Styled.header`
     /* border */
     border: none;
   }
+
+  div.logout-container > p {
+    display: none;
+  }
+
+  @media screen and (min-width: 768px) {
+    div.logout-container {
+      display: flex;
+      align-items: center;
+      column-gap: 15px;
+    }
+
+    div.logout-container > p {
+      display: block;
+    }
+  }
   
 `
