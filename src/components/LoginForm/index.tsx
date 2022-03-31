@@ -5,7 +5,6 @@ import { loginSchema } from "../../schemas/loginSchema";
 import { AxiosRequestConfig } from "axios";
 import api from "../../services/api";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../providers/Auth";
 
 interface ISubmitData {
@@ -32,9 +31,7 @@ const LoginForm = () => {
         const refreshToken = res.headers["refresh-token"];
 
         auth.login(token, refreshToken);
-
-        const navigate = useNavigate();
-        navigate("/");
+        window.location.reload();
       })
       .catch(() => {
         toast.error("Falha ao fazer o login.", {

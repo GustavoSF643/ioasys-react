@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
     --font-family-primary: 'Heebo', sans-serif;
   }
   
-  body {
+  * {
     /* margin/padding */
     margin: 0;
     padding: 0;
