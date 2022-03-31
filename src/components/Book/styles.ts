@@ -7,6 +7,7 @@ export const BookContainer = styled.div`
   column-gap: 15px;
 
   /* width / height */
+  width: 288px;
   height: 160px;
 
   /* margin / padding */
@@ -27,6 +28,7 @@ export const BookContainer = styled.div`
   div.book-image-container > img {
     /* width / height */
     height: 100%;
+    max-width: 90px;
   }
 
   div.book-info-container {
@@ -39,6 +41,20 @@ export const BookContainer = styled.div`
     height: 100%;
   }
 
+  div.book-info-container > :first-child > h4,
+  div.book-info-container > :first-child > p,
+  div.book-info-container > :last-child > p {
+    /* width */
+    max-width: 150px;
+
+    /* text */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    /* overflow */
+    overflow: hidden;
+  }
+
   div.book-info-container > :first-child > h4 {
     /* font */
     font-size: 14px;
@@ -47,6 +63,9 @@ export const BookContainer = styled.div`
 
   div.book-info-container > :first-child > p,
   div.book-info-container > :last-child > p {
+    /* width */
+    max-width: 150px;
+
     /* font */
     font-size: 12px;
     font-weight: 400;

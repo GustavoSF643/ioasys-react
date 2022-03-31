@@ -34,7 +34,7 @@ const refreshToken = () => {
       }
       api.request(axiosConfig)
         .then((res) => {
-          const accessToken = res.headers["Authorization"];
+          const accessToken = res.headers["authorization"];
           const refreshToken = res.headers["refresh-token"];
           auth.login(accessToken, refreshToken);
 
@@ -60,6 +60,7 @@ api.interceptors.response.use(
 
     if (error.response.status === 401 && token) {
       const response = await refreshToken();
+      window.location.reload();
       return response;
     }
 
