@@ -26,7 +26,7 @@ const refreshToken = () => {
     try {
       const refreshToken = auth.getRefreshToken();
       const axiosConfig: AxiosRequestConfig = {
-        url: "/auth/refresh_token",
+        url: "/auth/refresh-token",
         method: "POST",
         data: {
           refreshToken,
